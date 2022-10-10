@@ -1,26 +1,31 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Context, useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 import { UserProps } from "../types";
 import { api } from "../util";
 
-const Home: NextPage = () => {
-  const [users, setUsers] = useState<UserProps[]>([]);
+export interface HomePageProps {
+  users: UserProps[];
+}
 
-  const fetchUser = async () => {
-    try {
-      const response = await api.get("/users");
-      setUsers(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const Home = ({ users }: HomePageProps) => {
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  // const [users, setUsers] = useState<UserProps[]>([]);
+
+  // const fetchUser = async () => {
+  //   try {
+  //     const response = await api.get("/users");
+  //     setUsers(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
 
   return (
     <div className={styles.container}>
@@ -31,15 +36,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
         <div className={styles.grid}>
           {users.map((user) => (
             <a
@@ -52,7 +48,6 @@ const Home: NextPage = () => {
               <p>{user.company.catchPhrase}</p>
             </a>
           ))}
-
         </div>
       </main>
 
@@ -71,5 +66,23 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  console.log("GET STATIC PROPS CALLED");
+  
+  try {
+    const response = await api.get("/users");
+    return {
+      props: {
+        users: response.data,
+      },
+      revalidate: 5,
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+}
 
 export default Home;
