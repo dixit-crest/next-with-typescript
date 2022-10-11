@@ -280,7 +280,9 @@
       "brand": "Samsung",
       "category": "smartphones",
       "thumbnail": "https://dummyjson.com/image/i/products/3/thumbnail.jpg",
-      "images": ["https://dummyjson.com/image/i/products/3/1.jpg"]
+      "images": [
+        "https://dummyjson.com/image/i/products/3/1.jpg"
+      ]
     },
     {
       "id": 4,
@@ -419,8 +421,8 @@
       "author": "John Smith",
       "authorUsername": "johnsmith",
       "image": "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "date": "2022-07-06",
-      "read": "3 min",
+      "date": "2022-04-21",
+      "read": "6 min",
       "category": "Programming"
     },
     {
