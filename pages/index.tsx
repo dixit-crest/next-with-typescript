@@ -10,8 +10,8 @@ export interface HomePageProps {
   blogs: BlogProps[];
 }
 
-const Home = ({ blogs }: HomePageProps) => {
-  if(!blogs) return <h2>Loading..</h2>
+const Home = ({ blogs = [] }: HomePageProps) => {
+  if (!blogs) return <h2>Loading..</h2>;
   return (
     <Basic>
       <div className="w-full bg-white p-12">
@@ -57,16 +57,17 @@ export async function getStaticProps() {
   console.log("GET STATIC PROPS CALLED");
 
   try {
-    const response = await api.get("/blogs");
+    const response = await api.get("/api/projects");
     return {
       props: {
-        blogs: response.data,
+        blogs: response.data.project,
       },
       revalidate: 5,
     };
   } catch (error) {
     return {
-      notFound: true,
+      props: { blog: null },
+      notFound: false,
     };
   }
 }

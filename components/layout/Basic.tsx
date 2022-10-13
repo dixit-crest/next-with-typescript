@@ -9,12 +9,17 @@ interface LayoutProps {
 const Basic = ({ children, title, description }: LayoutProps) => {
   return (
     <React.Fragment>
-      <Head>
-        <title>{title || "D - Blogs"}</title>
-        <meta name="description" content={description || "Read more programming blogs here"} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {children}
+      <div className="min-h-screen">
+        <Head>
+          <title>{title || "D - Blogs"}</title>
+          <meta
+            name="description"
+            content={description || "Read more programming blogs here"}
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        {children}
+      </div>
     </React.Fragment>
   );
 };
